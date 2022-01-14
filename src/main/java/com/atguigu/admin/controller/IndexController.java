@@ -1,10 +1,16 @@
 package com.atguigu.admin.controller;
 
+import com.atguigu.admin.bean.Account;
 import com.atguigu.admin.bean.User;
+import com.atguigu.admin.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
@@ -59,5 +65,36 @@ public class IndexController {
         }
     }
 
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    AccountService accountService;
+
+    @ResponseBody
+    @GetMapping("/acct")
+    public Account getById(@RequestParam("id") Long id) {
+
+        return accountService.getAcctById(id);
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
